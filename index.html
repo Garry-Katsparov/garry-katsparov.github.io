@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garry Katsparov | Grandmaster of Naps</title>
+    
+    <!-- Google Fonts: IBM Plex Sans (Carbon's Font) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+    
+    <!-- Carbon Icons (via Phosphor for lightweight alternative) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* * IBM Carbon Design System - Gray 100 Theme Simulation 
+         * Core Tokens
+         */
+        :root {
+            /* Color Tokens */
+            --cds-background: #161616;
+            --cds-layer: #262626;
+            --cds-layer-accent: #393939;
+            --cds-text-primary: #f4f4f4;
+            --cds-text-secondary: #c6c6c6;
+            --cds-text-placeholder: #6f6f6f;
+            --cds-border: #525252;
+            
+            /* Spacing Tokens (1rem = 16px) */
+            --spacing-xs: 0.5rem;   /* 8px */
+            --spacing-sm: 1rem;     /* 16px */
+            --spacing-md: 1.5rem;   /* 24px */
+            --spacing-lg: 2rem;     /* 32px */
+            --spacing-xl: 3rem;     /* 48px */
+            --spacing-2xl: 4rem;    /* 64px */
+
+            /* Typography */
+            --font-family-sans: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+            --font-family-mono: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', monospace;
+        }
+
+        /* Reset & Base */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--cds-background);
+            color: var(--cds-text-primary);
+            font-family: var(--font-family-sans);
+            font-size: 16px;
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Layout Grid */
+        .container {
+            max-width: 1056px; /* Carbon max-width */
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+            width: 100%;
+        }
+
+        /* Navigation (UI Shell) */
+        .ui-shell {
+            height: 3rem;
+            background-color: var(--cds-background);
+            border-bottom: 1px solid var(--cds-layer-accent);
+            display: flex;
+            align-items: center;
+            padding: 0 var(--spacing-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .ui-shell__name {
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: 0.1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ui-shell__links {
+            margin-left: auto;
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .ui-shell__link {
+            font-size: 0.875rem;
+            color: var(--cds-text-secondary);
+            transition: color 0.2s ease;
+        }
+
+        .ui-shell__link:hover {
+            color: var(--cds-text-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: var(--spacing-2xl) 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+            align-items: center;
+        }
+
+        @media (min-width: 672px) {
+            .hero {
+                grid-template-columns: 1fr 1fr;
+                padding: var(--spacing-2xl) 0 5rem 0;
+            }
+        }
+
+        .hero__content h1 {
+            font-size: 2.625rem; /* 42px */
+            font-weight: 300;
+            line-height: 1.25;
+            margin-bottom: var(--spacing-md);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .cgm-badge {
+            font-size: 0.4em;
+            line-height: 1;
+            padding: 4px 8px;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            border-radius: 0; /* Rectangular */
+            font-weight: 400;
+            letter-spacing: 1px;
+            vertical-align: middle;
+        }
+
+        .hero__subtitle {
+            font-size: 1.25rem;
+            color: var(--cds-text-secondary);
+            font-weight: 300;
+            margin-bottom: var(--spacing-lg);
+            max-width: 600px;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 60px 15px 15px; /* Carbon padding structure */
+            font-size: 0.875rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 70ms cubic-bezier(0, 0, 0.38, 0.9);
+            position: relative;
+            min-height: 3rem;
+        }
+
+        .btn--instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: #fff;
+            border: none;
+            font-weight: 600;
+            text-shadow: none;
+            box-shadow: none;
+        }
+        
+        .btn--instagram i {
+            text-shadow: none;
+            filter: none;
+        }
+
+        .btn--instagram:hover {
+            opacity: 0.9;
+        }
+
+        .btn--icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Image Styling - Instagram Story Style */
+        .hero__image-container {
+            position: relative;
+            width: 100%;
+            max-width: 380px; /* Constrain size for profile pic look */
+            aspect-ratio: 1 / 1;
+            margin: 0 auto; /* Center in grid column */
+            
+            /* Flexbox for perfect centering */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            /* Circle Shape */
+            border-radius: 50%;
+            
+            /* Instagram Gradient Ring - Thicker (Padding) */
+            padding: 8px; 
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        .hero__image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            
+            /* Create the gap between ring and image - Thicker Gap */
+            border: 12px solid var(--cds-background); 
+            
+            /* Ensure border stays within the box model */
+            box-sizing: border-box; 
+        }
+
+        /* Stats Strip - Tile Presentation */
+        .stats {
+            background-color: var(--cds-background);
+            padding: var(--spacing-lg) 0;
+            border-top: 1px solid var(--cds-layer-accent);
+            border-bottom: 1px solid var(--cds-layer-accent);
+        }
+
+        .stats__grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+        }
+
+        @media (min-width: 672px) {
+            .stats__grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .stat-item {
+            background-color: var(--cds-layer);
+            padding: var(--spacing-md);
+            border: 1px solid var(--cds-border);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .stat-item:hover {
+            background-color: var(--cds-layer-accent);
+            border-color: var(--cds-text-secondary);
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            line-height: 1;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .stat-item p {
+            font-size: 0.75rem;
+            color: var(--cds-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0;
+        }
+
+        /* Best Game Section */
+        .best-game {
+            padding: var(--spacing-2xl) 0;
+            background-color: var(--cds-background);
+        }
+
+        .game-header {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .game-meta {
+            font-family: var(--font-family-mono);
+            color: var(--cds-text-secondary);
+            font-size: 0.875rem;
+            margin-top: var(--spacing-xs);
+        }
+
+        /* Carbon Data Table Simulation */
+        .game-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-family: var(--font-family-mono);
+        }
+
+        .game-table th {
+            background-color: var(--cds-layer);
+            color: var(--cds-text-primary);
+            font-weight: 600;
+            padding: var(--spacing-sm);
+            font-size: 0.875rem;
+            border-bottom: 1px solid var(--cds-border);
+        }
+
+        .game-table td {
+            padding: var(--spacing-sm);
+            border-bottom: 1px solid var(--cds-layer);
+            color: var(--cds-text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .game-table tr:hover td {
+            background-color: var(--cds-layer-accent);
+            color: var(--cds-text-primary);
+        }
+
+        .move-number {
+            color: var(--cds-text-placeholder);
+            width: 50px;
+        }
+
+        .annotation {
+            color: #42be65; /* Success Green for brilliant move */
+            font-weight: bold;
+        }
+
+        /* Chessboard Visualization */
+        .chessboard-container {
+            margin-top: var(--spacing-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .chessboard {
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            border: 8px solid var(--cds-border); 
+            background-color: var(--cds-border);
+        }
+
+        .square {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem; 
+            position: relative;
+            aspect-ratio: 1; 
+        }
+
+        @media (min-width: 672px) {
+            .square {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Classical Board Colors */
+        .square.light {
+            background-color: #f0d9b5;
+        }
+        
+        .square.dark {
+            background-color: #b58863;
+        }
+
+        /* Piece styling */
+        .piece {
+            cursor: default;
+            user-select: none;
+            line-height: 1;
+            font-weight: normal;
+        }
+
+        .piece.white {
+            color: #ffffff;
+            text-shadow: 
+                -1px -1px 0 #161616,  
+                 1px -1px 0 #161616,
+                -1px  1px 0 #161616,
+                 1px  1px 0 #161616;
+        }
+
+        .piece.black {
+            color: #161616;
+            text-shadow: 
+                -1px -1px 0 rgba(255,255,255,0.3),  
+                 1px -1px 0 rgba(255,255,255,0.3),
+                -1px  1px 0 rgba(255,255,255,0.3),
+                 1px  1px 0 rgba(255,255,255,0.3);
+        }
+
+        .board-caption {
+            margin-top: var(--spacing-sm);
+            font-family: var(--font-family-mono);
+            font-size: 0.75rem;
+            color: var(--cds-text-secondary);
+            text-align: center;
+        }
+
+        /* Layout for Game Section */
+        .game-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+            align-items: start;
+        }
+
+        @media (min-width: 768px) {
+            .game-layout {
+                grid-template-columns: 1fr 1fr;
+                align-items: center;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--cds-background);
+            padding: var(--spacing-xl) 0;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+
+        .footer-link {
+            color: var(--cds-text-secondary);
+            font-size: 0.875rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="ui-shell">
+        <div class="ui-shell__name">
+            <i class="ph ph-paw-print" style="font-size: 1.2rem;"></i>
+            Garry Katsparov
+        </div>
+        <div class="ui-shell__links">
+            <a href="https://www.instagram.com/garrykatsparov/" target="_blank" class="ui-shell__link">Instagram</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="container">
+        <section class="hero">
+            <div class="hero__content">
+                <h1>
+                    <span>Garry Katsparov</span>
+                    <span class="cgm-badge">CGM</span>
+                </h1>
+                <p class="hero__subtitle">
+                    Terrorising <a href="https://cesar.caldeira.cc" target="_blank" style="text-decoration: underline; color: inherit;">César Caldeira</a> with ruthless chess strategy and aggressive meowing. Not to be confused with his human namesake, Garry Kasparov.
+                </p>
+                
+                <a href="https://www.instagram.com/garrykatsparov/" target="_blank" class="btn btn--instagram">
+                    Follow on Instagram
+                    <i class="ph ph-instagram-logo btn--icon" style="font-size: 1.2rem;"></i>
+                </a>
+            </div>
+            
+            <div class="hero__image-container">
+                <img src="garry.jpg" alt="Garry Katsparov Portrait" class="hero__image">
+            </div>
+        </section>
+    </div>
+
+    <!-- Stats Bar -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats__grid">
+                <div class="stat-item">
+                    <h3>2905</h3>
+                    <p>Classical</p>
+                </div>
+                <div class="stat-item">
+                    <h3>2890</h3>
+                    <p>Rapid Rating</p>
+                </div>
+                <div class="stat-item">
+                    <h3>3200</h3>
+                    <p>Blitz (3AM Zoomies)</p>
+                </div>
+                <div class="stat-item">
+                    <h3 style="color: #42be65;">CGM</h3>
+                    <p>Cat Grandmaster</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Best Game Section -->
+    <section class="best-game">
+        <div class="container">
+            <div class="game-header">
+                <h2>The Immortal Game</h2>
+                <div class="game-meta">
+                    White: CGM Garry Katsparov (2905) &nbsp;|&nbsp; Black: GM Garry Kasparov (2812)
+                    <br>
+                    Location: The Living Room Carpet &nbsp;|&nbsp; Opening: Bongcloud Attack
+                </div>
+            </div>
+
+            <div class="game-layout">
+                <!-- Move List -->
+                <div>
+                    <table class="game-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>White</th>
+                                <th>Black</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="move-number">1.</td>
+                                <td>e4</td>
+                                <td>e5</td>
+                            </tr>
+                            <tr>
+                                <td class="move-number">2.</td>
+                                <td>
+                                    Ke2 <span class="annotation">!!</span>
+                                </td>
+                                <td>
+                                    1-0 (Black Resigns)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <p style="margin-top: var(--spacing-md); color: var(--cds-text-secondary); font-size: 0.875rem;">
+                        <i>*Black resigned due to the overwhelming psychological pressure of the accelerated King development.</i>
+                    </p>
+                </div>
+
+                <!-- Visual Board: Position after 2. Ke2 -->
+                <div class="chessboard-container">
+                    <div class="chessboard">
+                        <!-- Rank 8 (Black) -->
+                        <div class="square light"><span class="piece black">♜</span></div>
+                        <div class="square dark"><span class="piece black">♞</span></div>
+                        <div class="square light"><span class="piece black">♝</span></div>
+                        <div class="square dark"><span class="piece black">♛</span></div>
+                        <div class="square light"><span class="piece black">♚</span></div>
+                        <div class="square dark"><span class="piece black">♝</span></div>
+                        <div class="square light"><span class="piece black">♞</span></div>
+                        <div class="square dark"><span class="piece black">♜</span></div>
+                        
+                        <!-- Rank 7 (Black Pawns) -->
+                        <div class="square dark"><span class="piece black">♟</span></div>
+                        <div class="square light"><span class="piece black">♟</span></div>
+                        <div class="square dark"><span class="piece black">♟</span></div>
+                        <div class="square light"><span class="piece black">♟</span></div>
+                        <div class="square dark"></div> <!-- e7 empty (moved to e5) -->
+                        <div class="square light"><span class="piece black">♟</span></div>
+                        <div class="square dark"><span class="piece black">♟</span></div>
+                        <div class="square light"><span class="piece black">♟</span></div>
+
+                        <!-- Rank 6 -->
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+
+                        <!-- Rank 5 -->
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"><span class="piece black">♟</span></div> <!-- e5 Black Pawn -->
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+
+                        <!-- Rank 4 -->
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"><span class="piece white">♟</span></div> <!-- e4 White Pawn (Filled) -->
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+
+                        <!-- Rank 3 -->
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+                        <div class="square dark"></div>
+                        <div class="square light"></div>
+
+                        <!-- Rank 2 (White Pawns + King) -->
+                        <div class="square light"><span class="piece white">♟</span></div>
+                        <div class="square dark"><span class="piece white">♟</span></div>
+                        <div class="square light"><span class="piece white">♟</span></div>
+                        <div class="square dark"><span class="piece white">♟</span></div>
+                        <div class="square light"><span class="piece white">♚</span></div> <!-- e2 White King (Filled) -->
+                        <div class="square dark"><span class="piece white">♟</span></div>
+                        <div class="square light"><span class="piece white">♟</span></div>
+                        <div class="square dark"><span class="piece white">♟</span></div>
+
+                        <!-- Rank 1 (White Pieces - e1 empty) -->
+                        <div class="square dark"><span class="piece white">♜</span></div>
+                        <div class="square light"><span class="piece white">♞</span></div>
+                        <div class="square dark"><span class="piece white">♝</span></div>
+                        <div class="square light"><span class="piece white">♛</span></div>
+                        <div class="square dark"></div> <!-- e1 empty -->
+                        <div class="square light"><span class="piece white">♝</span></div>
+                        <div class="square dark"><span class="piece white">♞</span></div>
+                        <div class="square light"><span class="piece white">♜</span></div>
+                    </div>
+                    <div class="board-caption">Position after 2. Ke2!!</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <p class="footer-link">© 2026, César Caldeira (though we know who's really running the show here)</p>
+        </div>
+    </footer>
+
+</body>
+</html>
